@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Tareas Para Hacer</title>
+</head>
+<body>
+
+     <table border="1">
+          <thead>
+               <tr>
+                    <td>Id</td>
+                    <td>Descripcion</td>
+                    <td>Realizada</td>
+                    <td>Borrar</td>
+               </tr>
+          </thead>
+          <tbody>
+               {% for tarea in tareas %}
+               <tr>
+                         <td>{{ tarea.id }}</td>
+                    {% if tarea.realizada %}
+                         <td><del>{{ tarea.descripcion }}</del></td>
+                         <td>Si</td>
+                    {% else %}
+                         <td>{{ tarea.descripcion }}</td>
+                         <td><a href="realizada/{{ tarea.id }}">No</a></td>
+                    {% endif %}
+                         <td><a href="borrar/{{ tarea.id }}">Borrar</a></td>
+               </tr>
+               {% endfor %}
+          </tbody>
+     </table>
+
+     </br></br>
+     <form action="nuevaTarea" method="get">
+          <!-- Si queremos usar el metodo post, tenemos que añadir {% csrf_token %} al principio del formulario -->
+          <input type="text" placeholder="Introduce una nueva tarea" name="descripcion"></br></br>
+          <input type="submit">
+     </form>
+
+</body>
+</html>
